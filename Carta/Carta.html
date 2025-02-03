@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Arial Rounded MT Bold', cursive;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collage {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 5px;
+            z-index: 0;
+        }
+
+        .collage img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+        }
+
+        .collage img:hover {
+            opacity: 0.7;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeIn 2s ease-in-out;
+            z-index: 2;
+            position: relative;
+            border: 3px solid #ff3b3b;
+            max-width: 90%;
+            margin: 20px;
+        }
+
+        .hearts span {
+            position: fixed;
+            color: #ff3b3b;
+            animation: float 6s linear infinite;
+            opacity: 0;
+            font-size: 24px;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #ff3b3b;
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            cursor: pointer;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .yes {
+            background-color: #ff3b3b;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 59, 59, 0.4);
+        }
+
+        .yes:hover {
+            background-color: #ff1a1a;
+            transform: scale(1.05);
+        }
+
+        .no {
+            background-color: #f8f9fa;
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .celebracion {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-15px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(110vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .collage {
+                display: none;
+            }
+            
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Collage permanente -->
+    <div class="collage">
+        <img src="fotos/Foto1.jpeg" alt="Nuestra foto 1">
+        <img src="fotos/Foto2.jpeg" alt="Nuestra foto 2">
+        <img src="fotos/Foto3.jpeg" alt="Nuestra foto 3">
+        <img src="fotos/Foto4.jpeg" alt="Nuestra foto 4">
+        <img src="fotos/Foto5.jpeg" alt="Nuestra foto 5">
+        <img src="fotos/Foto6.jpeg" alt="Nuestra foto 6">
+    </div>
+
+    <div class="hearts"></div>
+    
+    <div class="container">
+        <h1 id="question">¿Quieres ser mi San Valentín? 💖</h1>
+        <div class="buttons">
+            <button class="yes" onclick="yesClicked()">¡Sí, por siempre! 😍</button>
+            <button class="no" id="noButton" onclick="noClicked()">No</button>
+        </div>
+    </div>
+
+    <script>
+        // Generar corazones (versión optimizada)
+        function createHearts() {
+            const heartsContainer = document.querySelector('.hearts');
+            heartsContainer.innerHTML = ''; // Limpiar corazones anteriores
+            const fragment = document.createDocumentFragment();
+            
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('span');
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 3 + 's';
+                heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+                fragment.appendChild(heart);
+            }
+            
+            heartsContainer.appendChild(fragment);
+        }
+        createHearts();
+
+        const messages = [
+            "¿Segura? 🥺",
+            "¡Piénsalo bien! 💔",
+            "¿En serio? 😢",
+            "¡Mira mi carita! 🥰",
+            "¿Y nuestro futuro? 🌸",
+            "¡Eres mi todo! 💘",
+            "¡No puedo sin ti! 💕",
+            "¡Te amo mucho! 💕",
+            "¡Eres mi razón! 🌟"
+        ];
+
+        let messageIndex = 0;
+
+        function yesClicked() {
+            const container = document.querySelector('.container');
+            container.innerHTML = `
+                <h1>¡Gracias por elegirme! 💞</h1>
+                <div class="celebracion">🎉💖🎈</div>
+                <p>Eres la mejor decisión de mi vida, mi princesa</p>
+            `;
+            createHearts(); // Regenerar corazones sin afectar el collage
+        }
+
+        function noClicked() {
+            const noButton = document.getElementById('noButton');
+            
+            noButton.style.animation = 'shake 0.5s ease';
+            setTimeout(() => noButton.style.animation = '', 500);
+            
+            noButton.innerText = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length;
+        }
+    </script>
+</body>
+</html>
