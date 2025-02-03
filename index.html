@@ -216,6 +216,23 @@
                 <p>Eres la mejor decisión de mi vida, mi princesa</p>
             `;
             createHearts(); // Regenerar corazones sin afectar el collage
+
+            // Reemplaza con el número internacional de tu novia (ej: 521234567890)
+            const numero = '50241491343';
+            
+            // Pedir mensaje personalizado
+            let mensaje = prompt("Escribe un mensaje bonito para enviar por WhatsApp ❤️:", "¡Sí quiero ser tu Valentín! Te amo más que a nada en este mundo.");
+
+            // Si el usuario cancela, se usa un mensaje por defecto
+            if (!mensaje) {
+                mensaje = "¡Sí quiero ser tu Valentín! Te amo más que a nada en este mundo.";
+            }
+
+            // Codificar el mensaje para que sea compatible con URL
+            const mensajeCodificado = encodeURIComponent(mensaje);
+
+            // Abrir enlace de WhatsApp
+            window.open(`https://wa.me/${numero}?text=${mensajeCodificado}`, '_blank');
         }
 
         function noClicked() {
